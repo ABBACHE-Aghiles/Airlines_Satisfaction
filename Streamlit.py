@@ -72,19 +72,19 @@ with tab1:
         st.warning("Veuillez choisir un fichier CSV")
         
 with tab2:
-    
-    # Supprimer les colonnes "Unnamed: 0" et "ID"
-    dataframe.drop(columns=['Unnamed: 0', 'ID'], inplace=True)
+    if dataframe is not None:
+        # Supprimer les colonnes "Unnamed: 0" et "ID"
+        dataframe.drop(columns=['Unnamed: 0', 'ID'], inplace=True)
 
-    # Afficher le code pour supprimer les colonnes
-    st.write("# Supprimer les colonnes \"Unnamed: 0\" et \"ID\"")
-    st.write("dataframe.drop(columns=['Unnamed: 0', 'ID'], inplace=True)")
+        # Afficher le code pour supprimer les colonnes
+        st.write("# Supprimer les colonnes \"Unnamed: 0\" et \"ID\"")
+        st.write("dataframe.drop(columns=['Unnamed: 0', 'ID'], inplace=True)")
 
-    # Afficher la forme du DataFrame mis à jour
-    st.write("La forme du DataFrame mis à jour est : ", dataframe.shape)
+        # Afficher la forme du DataFrame mis à jour
+        st.write("La forme du DataFrame mis à jour est : ", dataframe.shape)
 
-    # Afficher les informations du DataFrame mis à jour
-    st.write("Les informations du DataFrame mis à jour sont : ")
-    st.write(dataframe.info())
+        # Afficher les informations du DataFrame mis à jour
+        st.write("Les informations du DataFrame mis à jour sont : ")
+        st.write(dataframe.info())
 
 
