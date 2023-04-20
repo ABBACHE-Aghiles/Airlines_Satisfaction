@@ -81,23 +81,23 @@ with tab1:
             st.write("LeDataFrame mis à jour : ")
             st.write(dataframe.head())
             # Vérification des valeurs nulles
-            check_missing = df.isnull().sum() * 100 / df.shape[0]
+            check_missing = dataframe.isnull().sum() * 100 / dataframe.shape[0]
             missing_cols = check_missing[check_missing > 0].sort_values(ascending=False).index.tolist()
 
             if missing_cols:
                 st.warning(f"Il y a des valeurs manquantes dans les colonnes suivantes : {', '.join(missing_cols)}")
-                df.fillna(df.median(), inplace=True)
+                dataframe.fillna(dataframe.median(), inplace=True)
             else:
                 st.success("Aucune valeur manquante dans le jeu de données")
 
             # Affichage des types de données
             st.write("Types de données :")
-            st.write(df.dtypes)
+            st.write(dataframe.dtypes)
 
             # Affichage des valeurs uniques pour les colonnes catégorielles
             st.write("Valeurs uniques pour les colonnes catégorielles :")
-            for col in df.select_dtypes(include=['category']).columns:
-                st.write(f"{col}: {df[col].unique()}")
+            for col in dataframe.select_dtypes(include=['category']).columns:
+                st.write(f"{col}: {dataframe[col].unique()}")
 
         
 
