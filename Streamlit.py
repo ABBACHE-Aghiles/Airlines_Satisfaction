@@ -64,7 +64,7 @@ with tab1:
             st.write("Statistiques descriptives :")
             st.dataframe(dataframe.describe())
             st.write("Informations globales :")
-            st.dataframe(dataframe.info)
+            st.dataframe(dataframe.info())
 
     else: 
         st.warning("Veuillez choisir un fichier CSV")
