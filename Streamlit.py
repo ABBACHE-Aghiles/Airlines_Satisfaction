@@ -4,7 +4,7 @@ import matplotlib.pyplot as plt
 import seaborn as sns
 import numpy as np
 
-st.set_page_config(page_title="Data Slayers ⚔️")import streamlit as st
+st.set_page_config(page_title="Data Slayers ⚔️")
 
 st.title("Data Slayers ⚔️")
 
