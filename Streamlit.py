@@ -60,7 +60,7 @@ with tab1:
             st.write("Statistiques descriptives :")
             st.dataframe(dataframe.describe().T.style.set_properties(**{"background-color": "#FBA7A7", "font-size" : "17px",
                                         "color": "#ffffff", "border-radius" : "1px", "border": "1.5px solid black"}))
-            st.write("Nombre de valeur uniques :")
+            st.write("Nombre de valeurs uniques :")
             st.dataframe(dataframe.nunique())
             st.write("Vous pouvez constater ce qui suit :")
             st.write("1) La colonne correspondant à la caractéristique Délai d'arrivée en minutes comporte 310 valeurs manquantes.")
