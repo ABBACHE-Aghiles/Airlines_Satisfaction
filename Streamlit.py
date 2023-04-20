@@ -1,16 +1,10 @@
 import pandas as pd
-import time
-import math
-import streamlit as st
-from io import StringIO
-import numpy as np
-import seaborn as sns
 import matplotlib.pyplot as plt
-from sklearn.model_selection import train_test_split
-from sklearn.metrics import r2_score
-from sklearn.linear_model import LinearRegression
-from sklearn.preprocessing import MinMaxScaler, StandardScaler, LabelEncoder
-from sklearn.metrics import mean_squared_error, mean_absolute_percentage_error
+import seaborn as sns
+import numpy as np
+sns.set_theme(color_codes=True)
+pd.set_option('display.max_columns', None)
+import streamlit as st
 
 st.set_page_config(layout="wide")
 st.title("Data Slayers ⚔️")
@@ -62,7 +56,8 @@ with tab1:
                 st.dataframe(dataframe.isnull().sum())
             st.write("Nombre de lignes et colonnes", dataframe.shape)
             st.write("Statistiques descriptives :")
-            st.dataframe(dataframe.describe())
+            st.dataframe(dataframe.describe().T.style.set_properties(**{"background-color": "#FBA7A7", "font-size" : "17px",
+                                        "color": "#ffffff", "border-radius" : "1px", "border": "1.5px solid black"}))
             st.write("Nombre de valeur uniques :")
             st.dataframe(dataframe.nunique())
             st.write("Vous pouvez constater ce qui suit :")
@@ -73,101 +68,3 @@ with tab1:
     else: 
         st.warning("Veuillez choisir un fichier CSV")
 
-
-with tab2:
-    if dataframe is not None:
-        st.title("Prétraitement des données")
-
-        def preprocess_column(column, option, x=None):
-            if option == "Pas de modification":
-                pass
-            if option == "Supprimer NaN":
-                column = column.fillna(value=np.nan).dropna()
-            elif option == "Fill par 0":
-                column = column.fillna(0)
-            elif option == "Fill Mean":
-                column = column.fillna(column.mean())
-            elif option == "Fill Median":
-                column = column.fillna(column.median())
-            elif option == "Encoding":
-                encoder = LabelEncoder()
-                column = encoder.fit_transform(column)
-            elif option == "Arrondir":
-                column = column.round(x)
-            return column
-
-        def split_list(lst):
-            middle = math.ceil(len(lst) / 2)
-            return lst[:middle], lst[middle:]
-
-        col1, col2 = st.columns(2)
-        col_names1, col_names2 = split_list(dataframe.columns)
-        col1, col2 = st.columns(2)
-        dataframe_0 = dataframe.copy()
-        x = st.number_input(
-            "Choisir le nombre de décimales",
-            min_value=1,
-            max_value=4,
-            value=1)
-        with col1:
-            for col in col_names1:
-                option = st.radio(
-                    f"Choisir une option de prétraitement pour la colonne {col}",
-                    [
-                        "Pas de modification",
-                        "Supprimer NaN",
-                        "Fill par 0",
-                        "Fill Mean",
-                        "Fill Median",
-                        "Encoding",
-                        "Arrondir"])
-                processed_col = preprocess_column(dataframe[col], option, x)
-                dataframe_0[col] = processed_col
-        with col2:
-            for col in col_names2:
-                option = st.radio(
-                    f"Choisir une option de prétraitement pour la colonne {col}",
-                    [
-                        "Pas de modification",
-                        "Supprimer NaN",
-                        "Fill par 0",
-                        "Fill Mean",
-                        "Fill Median",
-                        "Encoding",
-                        "Arrondir"])
-                processed_col = preprocess_column(dataframe[col], option, x)
-                dataframe_0[col] = processed_col
-            old_val = None
-            new_val = None
-            replace_val = st.text_input("Remplacer les valeurs", value=old_val)
-            by_val = st.text_input("Remplacer par", value=new_val)
-            if replace_val != old_val or by_val != new_val:
-                dataframe_0_new = dataframe_0.replace(replace_val, by_val)
-                dataframe_0 = dataframe_0_new
-                old_val = replace_val
-                new_val = by_val
-
-        col3, col4 = st.columns(2)
-        with col3:
-            st.write("Données avant prétraitement")
-            st.dataframe(dataframe)
-            st.write(dataframe.shape)
-        with col4:
-            st.write("Données après prétraitement")
-            st.dataframe(dataframe_0)
-            st.write(dataframe_0.shape)
-
-        @st.cache_data
-        def convert_df(df):
-            # IMPORTANT: Cache the conversion to prevent computation on every
-            # rerun
-            return df.to_csv().encode('utf-8')
-
-        csv = convert_df(dataframe_0)
-
-        st.download_button(
-            label="Download data as CSV",
-            data=csv,
-            file_name='output.csv',
-            mime='text/csv',
-        )
