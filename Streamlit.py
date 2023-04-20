@@ -99,7 +99,8 @@ with tab2:
         ax.set_title("Satisfaction")
         # Afficher le graphique camembert
         st.write(fig)
-        st.write("Comme la pie chart le montre , la sélection est plus ou moins équilibrée.")
+        st.write("**Comme la pie chart le montre, la sélection est plus ou moins équilibrée.**<br>")
+        st.write(" ")
         # Liste des variables catégorielles à tracer
         cat_vars = ['Gender', 'Customer Type', 'Type of Travel', 'Class']
 
