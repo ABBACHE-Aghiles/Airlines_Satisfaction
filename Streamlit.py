@@ -2,6 +2,7 @@ import pandas as pd
 import matplotlib.pyplot as plt
 import seaborn as sns
 import numpy as np
+from io import StringIO
 sns.set_theme(color_codes=True)
 pd.set_option('display.max_columns', None)
 import streamlit as st
@@ -13,8 +14,8 @@ st.title("Data Slayers ⚔️")
 dataframe = None
 
 # Onglets
-tab1, tab2 = st.tabs(
-    ["Upload & data exploration", "Prétraitement des données"])
+tab1 = st.tabs(
+    ["Upload & data exploration"])
 
 # Page d'analyse
 with tab1:
