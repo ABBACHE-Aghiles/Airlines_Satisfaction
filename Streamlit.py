@@ -6,7 +6,9 @@ from io import StringIO
 sns.set_theme(color_codes=True)
 pd.set_option('display.max_columns', None)
 import streamlit as st
-
+import plotly.express as px
+import plotly.graph_objects as go
+from plotly.subplots import make_subplots
 st.set_page_config(layout="wide")
 st.title("Data Slayers ⚔️")
 
@@ -116,5 +118,33 @@ with tab2:
 
         # Afficher le graphique dans Streamlit
         st.pyplot(fig)
+        # Calculer le décompte des âges
+        age_count = df['Age'].value_counts(ascending=False).head(10)
+
+        # Créer un graphique à barres horizontal avec Plotly Express
+        fig = px.bar(y=age_count.values, 
+             x=age_count.index, 
+             color = age_count.index,
+             color_discrete_sequence=px.colors.sequential.PuBuGn,
+             text=age_count.values,
+             title= "Top 10 des tranches d'âge les plus voyageuses :",
+             template= 'plotly_dark')
+
+        # Mettre à jour les titres des axes et la taille de la police
+        fig.update_layout(
+                xaxis_title="Âge",
+                yaxis_title="Nombre de voyages",
+                font = dict(size=20,family="Franklin Gothic"))
+
+        # Afficher le graphique dans Streamlit
+        st.plotly_chart(fig)
+
+
+
+
+
+
+
+        
 
         
