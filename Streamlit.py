@@ -3,7 +3,6 @@ import pandas as pd
 import matplotlib.pyplot as plt
 import seaborn as sns
 import numpy as np
-pip install matplotlib
 # Configuration de Seaborn pour Streamlit
 sns.set_theme(color_codes=True)
 
