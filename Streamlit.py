@@ -14,8 +14,8 @@ st.title("Data Slayers ⚔️")
 dataframe = None
 
 # Onglets
-tab1 = st.tab(
-    ["Upload & data exploration"])
+tab1 , tab2 = st.tabs(
+    ["Upload & data exploration", "Visualisation"])
 
 
 # Page d'analyse
