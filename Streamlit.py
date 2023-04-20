@@ -96,7 +96,7 @@ with tab1:
 
             # Affichage des valeurs uniques pour les colonnes catégorielles
             st.write("Valeurs uniques pour les colonnes catégorielles :")
-            for col in dataframe.select_dtypes(include=['category']).columns:
+            for col in dataframe.select_dtypes(include=['object']).columns:
                 st.write(f"{col}: {dataframe[col].unique()}")
 
         
