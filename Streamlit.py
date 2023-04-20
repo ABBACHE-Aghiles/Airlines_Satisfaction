@@ -71,14 +71,14 @@ with tab1:
 
             # Afficher le code pour supprimer les colonnes
             st.write("# Supprimer les colonnes \"Unnamed: 0\" et \"ID\"")
-            st.write("df.drop(columns=['Unnamed: 0', 'ID'], inplace=True)")
+            st.write("dataframe.drop(columns=['Unnamed: 0', 'ID'], inplace=True)")
 
             # Afficher la forme du DataFrame mis à jour
             st.write("La forme du DataFrame mis à jour est : ", dataframe.shape)
 
             # Afficher les informations du DataFrame mis à jour
             st.write("Les informations du DataFrame mis à jour sont : ")
-            st.write(df.info())
+            st.write(dataframe.info())
 
     else: 
         st.warning("Veuillez choisir un fichier CSV")
