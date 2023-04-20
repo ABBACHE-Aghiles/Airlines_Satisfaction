@@ -14,7 +14,7 @@ st.title("Data Slayers ⚔️")
 dataframe = None
 
 # Onglets
-tab1 = st.tabs(
+tab1 = st.tab(
     ["Upload & data exploration"])
 
 
