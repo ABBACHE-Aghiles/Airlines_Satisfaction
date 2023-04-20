@@ -86,6 +86,5 @@ with tab1:
     else: 
         st.warning("Veuillez choisir un fichier CSV")
         
-with tab2:
-    if dataframe is not None:
+
         
