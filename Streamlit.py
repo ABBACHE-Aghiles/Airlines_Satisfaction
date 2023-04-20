@@ -86,5 +86,16 @@ with tab1:
     else: 
         st.warning("Veuillez choisir un fichier CSV")
         
+        
+with tab2:
+    if dataframe is not None:
+        
+        # Créer un graphique camembert pour la colonne "satisfaction"
+        fig, ax = plt.subplots()
+        ax.pie(df.satisfaction.value_counts(), labels=["Neutral or dissatisfied", "Satisfied"],
+        colors=sns.color_palette("YlOrBr"), autopct='%1.1f%%')
+        ax.set_title("Satisfaction")
+        # Afficher le graphique camembert
+        st.write(fig)
 
         
