@@ -108,7 +108,7 @@ with tab2:
         # Créer un diagramme à barres pour chaque variable catégorielle avec une boucle for
         for i, var in enumerate(cat_vars):
             
-            sns.countplot(x=var, hue='satisfaction', data=df, ax=axs[i])
+            sns.countplot(x=var, hue='satisfaction', data=dataframe, ax=axs[i])
             axs[i].set_xticklabels(axs[i].get_xticklabels(), rotation=90)
 
         # Ajuster l'espacement entre les sous-plots
