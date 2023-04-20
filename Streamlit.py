@@ -5,10 +5,6 @@ import seaborn as sns
 import numpy as np
 
 st.set_page_config(page_title="Data Slayers ⚔️")
-
-st.title("Data Slayers ⚔️")
-
-# Afficher le titre en haut et centré
 st.markdown("<h1 style='text-align: center;'>Data Slayers ⚔️</h1>", unsafe_allow_html=True)
 st.title("Exploration de données pour la satisfaction des passagers aériens")
 
