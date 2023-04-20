@@ -159,7 +159,7 @@ with tab2:
         plt.subplots_adjust(wspace=0.5, hspace=0.5)
 
         # Afficher le graphique
-s       t.pyplot(fig)
+        st.pyplot(fig)
 
 
 
