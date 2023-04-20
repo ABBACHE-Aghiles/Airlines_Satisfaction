@@ -19,8 +19,8 @@ st.title("Data Slayers ⚔️")
 dataframe = None
 
 # Onglets
-tab1, tab2, tab3, tab4, tab5 = st.tabs(
-    ["Upload & data exploration", "Traitements des données", "Visualisation", "Corrélation", "Prédictions"])
+tab1, tab2 = st.tabs(
+    ["Upload & data exploration", "Prétraitement des données])
 
 # Page d'analyse
 with tab1:
@@ -64,7 +64,7 @@ with tab1:
             st.write("Statistiques descriptives :")
             st.dataframe(dataframe.describe())
             st.write("Informations globales :")
-            st.dataframe(dataframe.info())
+            st.dataframe(dataframe.info)
 
     else: 
         st.warning("Veuillez choisir un fichier CSV")
@@ -72,7 +72,7 @@ with tab1:
 
 with tab2:
     if dataframe is not None:
-        st.title("Prétraitement")
+        st.title("Prétraitement des données")
 
         def preprocess_column(column, option, x=None):
             if option == "Pas de modification":
@@ -167,150 +167,3 @@ with tab2:
             file_name='output.csv',
             mime='text/csv',
         )
-with tab3:
-    st.title("Visualisation")
-    st.write("Les données affichées sont celles du fichier modifiable dans l'onglet traitement des données")
-    if dataframe is not None:
-        col_list_0 = list(dataframe_0.columns[:-1].unique())
-        st.markdown(col_list_0)
-        x_val_0 = st.selectbox(
-            "Sélectionner la valeur en x",
-            col_list_0,
-            key='unique_key_1')
-        y_val_0 = st.selectbox(
-            "Sélectionner la valeur en y",
-            col_list_0,
-            key='unique_key_2')
-        if x_val_0 == y_val_0:
-            st.info("X et Y doivent être différentes")
-        elif dataframe is not None and x_val_0 is not None and y_val_0 is not None:
-
-            #time.sleep(5)
-            fig, ax = plt.subplots()
-            ax.scatter(dataframe_0[x_val_0], dataframe_0[y_val_0])
-            ax.set_xlabel(x_val_0)
-            ax.set_ylabel(y_val_0)
-            st.pyplot(fig)
-            plt.clf()
-
-# Page de modélisation
-with tab4:
-    st.write("Modélisation")
-    if dataframe is not None:
-        dataframe_num = dataframe_0.select_dtypes(include=[np.number])
-
-        fig_pairplot = sns.pairplot(
-            dataframe_num, diag_kind='kde', corner=True)
-        fig_pairplot.fig.set_size_inches(15, 10)
-        axes = fig_pairplot.axes
-        for i in range(len(axes)):
-            for j in range(len(axes)):
-                if i == len(axes) - 1:
-                    axes[i][j].xaxis.label.set_rotation(90)
-                    axes[i][j].xaxis.labelpad = 15
-                if j == 0:
-                    axes[i][j].yaxis.label.set_rotation(0)
-                    axes[i][j].yaxis.label.set_ha('right')
-                    axes[i][j].yaxis.labelpad = 15
-        if fig_pairplot is not None:
-            st.pyplot(fig_pairplot)
-            plt.clf()
-
-
-with tab5:
-    st.write("Correlation")
-    if dataframe is not None:
-        dataframe_num = dataframe_0.select_dtypes(include=[np.number])
-
-        corr_matrix = round(dataframe_num.corr(), 2)
-        headmap_cor = sns.heatmap(
-            corr_matrix,
-            annot=True,
-            cmap='Reds',
-            linewidths=0.2)
-        headmap_cor = headmap_cor.get_figure()
-        headmap_cor.set_size_inches(8, 6)
-        if headmap_cor is not None:
-            st.pyplot(headmap_cor)
-
-
-with tab5:
-    st.write("Prédiction")
-    d, g = st.columns(2)
-    if dataframe is not None:
-
-        col_list = list(dataframe_0.columns[:-1].unique())
-        selected_columns_exp = st.multiselect(
-            "Sélectionner la ou les valeur(s) explicatives",
-            dataframe_0.columns)
-        unselected_columns = list(set(col_list) - set(selected_columns_exp))
-        selected_columns_pred = st.multiselect(
-            "Sélectionner la ou les valeur(s) à prédire",
-            dataframe_0.columns)
-
-        X = dataframe_0[selected_columns_exp]
-        y = dataframe_0[selected_columns_pred]
-        X_train, X_test, y_train, y_test = train_test_split(
-            X, y, test_size=0.2)
-        normalisation = st.selectbox(
-            "Choisir une méthode de normalisation", [
-                "Aucune", "MinMax Scaler", "Standard Scaler"])
-        model = st.selectbox(
-            "Choisir un modèle", [
-                "Régression linéaire", "Régression logistique"])
-        if len(selected_columns_exp) > 0 and len(selected_columns_pred) > 0:
-
-        # Split des données en train et test
-
-            if normalisation == "Aucune":
-                X_train_std = X_train
-                X_test_std = X_test
-            elif normalisation == "MinMax Scaler":
-                scaler = MinMaxScaler()
-                X_train_std = scaler.fit_transform(X_train)
-                X_test_std = scaler.transform(X_test)
-            else:
-                scaler = StandardScaler()
-                X_train_std = scaler.fit_transform(X_train)
-                X_test_std = scaler.transform(X_test)
-
-            if model == "Régression linéaire":
-
-                # Régression linéaire sur les données normalisées
-                reg_lin = LinearRegression()
-                reg_lin.fit(X_train_std, y_train)
-
-                # Evaluation du modèle sur les données de test
-                y_pred = reg_lin.predict(X_test_std)
-                r2 = r2_score(y_test, y_pred)
-                st.write("R2 score : ", r2.round(decimals=2))
-                mse = mean_squared_error(y_test, y_pred)
-                st.write("MSE : ", mse.round(decimals=2))
-                mape = mean_absolute_percentage_error(y_test, y_pred)
-                st.write("MAPE : ", mape.round(decimals=2))
-                fig, ax = plt.subplots()
-                ax.scatter(y_test, y_pred)
-                ax.set_xlabel("Valeurs réelles")
-                ax.set_ylabel("Valeurs prédites")
-                st.balloons()
-                st.pyplot(fig)
-                plt.clf()
-            if model == "Régression logistique":
-                # Régression logistique sur les données normalisées
-                reg_log = LogisticRegression()
-                reg_log.fit(X_train_std, y_train)
-
-                # Evaluation du modèle sur les données de test
-                y_pred = reg_log.predict(X_test_std)
-                r2 = r2_score(y_test, y_pred)
-                st.write("R2 score : ", r2.round(decimals=2))
-                mse = mean_squared_error(y_test, y_pred)
-                st.write("MSE : ", mse.round(decimals=2))
-                mape = mean_absolute_percentage_error(y_test, y_pred)
-                st.write("MAPE : ", mape.round(decimals=2))
-                # fig, ax = plt.subplots()
-                # ax.scatter(y_test, y_pred)
-                # ax.set_xlabel("Valeurs réelles")
-                # ax.set_ylabel("Valeurs prédites")
-                # st.pyplot(fig)
-                # plt.clf()
