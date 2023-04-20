@@ -13,14 +13,14 @@ from sklearn.preprocessing import MinMaxScaler, StandardScaler, LabelEncoder
 from sklearn.metrics import mean_squared_error, mean_absolute_percentage_error
 
 st.set_page_config(layout="wide")
-st.title("Analyse fde données")
+st.title("Data Slayers ⚔️")
 
 # Définir dataframe comme une variable globale
 dataframe = None
 
 # Onglets
-tab1, tab2, tab3, tab4, tab5, tab6 = st.tabs(
-    ["Upload & data exploration", "Traitements des données", "Scatter plot", "Pairplot", "Corrélation", "Prédictions"])
+tab1, tab2, tab3, tab4, tab5 = st.tabs(
+    ["Upload & data exploration", "Traitements des données", "Visualisation", "Corrélation", "Prédictions"])
 
 # Page d'analyse
 with tab1:
@@ -63,6 +63,8 @@ with tab1:
             st.write("Nombre de lignes et colonnes", dataframe.shape)
             st.write("Statistiques descriptives :")
             st.dataframe(dataframe.describe())
+            st.write("Informations globales :")
+            st.dataframe(dataframe.info())
 
     else: 
         st.warning("Veuillez choisir un fichier CSV")
@@ -232,7 +234,7 @@ with tab5:
             st.pyplot(headmap_cor)
 
 
-with tab6:
+with tab5:
     st.write("Prédiction")
     d, g = st.columns(2)
     if dataframe is not None:
