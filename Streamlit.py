@@ -74,7 +74,7 @@ with tab1:
 
             # Afficher la forme du DataFrame mis à jour
             st.write("La forme du DataFrame mis à jour est : ", dataframe.shape)
-
+        
             # Afficher les informations du DataFrame mis à jour
             st.write("LeDataFrame mis à jour : ")
             st.write(dataframe.head())
@@ -89,7 +89,7 @@ with tab1:
         
 with tab2:
     if dataframe is not None:
-        
+        st.write("# Analyse exploratoire des données")
         # Créer un graphique camembert pour la colonne "satisfaction"
         fig, ax = plt.subplots()
         ax.pie(dataframe.satisfaction.value_counts(), labels=["Neutral or dissatisfied", "Satisfied"],
@@ -97,5 +97,24 @@ with tab2:
         ax.set_title("Satisfaction")
         # Afficher le graphique camembert
         st.write(fig)
+        st.write("Comme la pie chart le montre , la sélection est plus ou moins équilibrée.")
+        # Liste des variables catégorielles à tracer
+        cat_vars = ['Gender', 'Customer Type', 'Type of Travel', 'Class']
+
+        # Créer une figure avec des sous-intrigues
+        fig, axs = plt.subplots(nrows=2, ncols=2, figsize=(15, 15))
+        axs = axs.flatten()
+
+        # Créer un diagramme à barres pour chaque variable catégorielle avec une boucle for
+        for i, var in enumerate(cat_vars):
+            
+            sns.countplot(x=var, hue='satisfaction', data=df, ax=axs[i])
+            axs[i].set_xticklabels(axs[i].get_xticklabels(), rotation=90)
+
+        # Ajuster l'espacement entre les sous-plots
+        fig.tight_layout()
+
+        # Afficher le graphique dans Streamlit
+        st.pyplot(fig)
 
         
