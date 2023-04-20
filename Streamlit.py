@@ -115,7 +115,7 @@ with tab2:
         # Créer un graphique camembert pour la colonne "satisfaction"
         fig, ax = plt.subplots()
         ax.pie(dataframe.satisfaction.value_counts(), labels=["Neutral or dissatisfied", "Satisfied"],
-        colors=sns.color_palette("YlOrBr", autopct='%1.1f%%'))
+        colors=sns.color_palette("YlOrBr"), autopct = '%1.1f%%')
         ax.set_title("Satisfaction")
         # Afficher le graphique camembert
         st.write(fig)
