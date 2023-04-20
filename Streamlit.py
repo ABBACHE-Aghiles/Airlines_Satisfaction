@@ -63,8 +63,12 @@ with tab1:
             st.write("Nombre de lignes et colonnes", dataframe.shape)
             st.write("Statistiques descriptives :")
             st.dataframe(dataframe.describe())
-            st.write("Informations globales :")
-            st.dataframe(dataframe.info())
+            st.write("Nombre de valeur uniques :")
+            st.dataframe(dataframe.nunique())
+            st.write("Vous pouvez constater ce qui suit :")
+            st.write("1) La colonne correspondant à la caractéristique Délai d'arrivée en minutes comporte 310 valeurs manquantes.")
+            st.write("2) Les deux premières caractéristiques sont inutiles et n'affecteront pas la classification, nous devrions donc nous en débarrasser.")
+            
 
     else: 
         st.warning("Veuillez choisir un fichier CSV")
