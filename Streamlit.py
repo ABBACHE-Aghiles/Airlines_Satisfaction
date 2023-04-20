@@ -74,9 +74,11 @@ with tab1:
 with tab2:
     if dataframe is not None:
         # Supprimer les colonnes "Unnamed: 0" et "ID"
-        dataframe.drop(columns=['Unnamed: 0', 'ID'], inplace=True)
+        dataframe.drop(columns=['Unnamed: 0', 'id'], inplace=True)
 
-        
+        # Afficher le code pour supprimer les colonnes
+        st.write("# Supprimer les colonnes \"Unnamed: 0\" et \"ID\"")
+        st.write("dataframe.drop(columns=['Unnamed: 0', 'ID'], inplace=True)")
 
         # Afficher la forme du DataFrame mis à jour
         st.write("La forme du DataFrame mis à jour est : ", dataframe.shape)
