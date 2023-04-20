@@ -14,8 +14,8 @@ st.title("Data Slayers ⚔️")
 dataframe = None
 
 # Onglets
-tab1, tab2, tab3, tab4, tab5, tab6 = st.tabs(
-    ["Upload & data exploration", "Traitements des données", "Scatter plot", "Pairplot", "Corrélation", "Prédictions"])
+tab1 = st.tabs(
+    ["Upload & data exploration"])
 
 
 # Page d'analyse
