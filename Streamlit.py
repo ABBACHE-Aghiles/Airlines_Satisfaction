@@ -139,6 +139,28 @@ with tab2:
 
         # Afficher le graphique dans Streamlit
         st.plotly_chart(fig)
+        # Sélectionner les index des variables catégorielles
+        categorical_indexes = [0, 1, 3, 4] + list(range(6, 20))
+
+        # Extraire les variables catégorielles
+        categ = dataframe.iloc[:,categorical_indexes]
+
+        # Créer une figure avec des sous-graphiques
+        fig, axes = plt.subplots(6, 3, figsize = (20, 20))
+        for i, col in enumerate(categ):
+            column_values = dataframe[col].value_counts()
+            labels = column_values.index
+            sizes = column_values.values
+            axes[i//3, i%3].pie(sizes, labels = labels, colors = sns.color_palette("YlOrBr"), autopct = '%1.0f%%', startangle = 90)
+            axes[i//3, i%3].axis('equal')
+            axes[i//3, i%3].set_title(col)
+
+        # Ajuster l'espacement entre les sous-graphiques
+        plt.subplots_adjust(wspace=0.5, hspace=0.5)
+
+        # Afficher le graphique
+s       t.pyplot(fig)
+
 
 
 
