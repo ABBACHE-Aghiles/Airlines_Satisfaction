@@ -119,7 +119,7 @@ with tab2:
         # Afficher le graphique dans Streamlit
         st.pyplot(fig)
         # Calculer le décompte des âges
-        age_count = df['Age'].value_counts(ascending=False).head(10)
+        age_count = dataframe['Age'].value_counts(ascending=False).head(10)
 
         # Créer un graphique à barres horizontal avec Plotly Express
         fig = px.bar(y=age_count.values, 
