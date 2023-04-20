@@ -160,6 +160,33 @@ with tab2:
 
         # Afficher le graphique
         st.pyplot(fig)
+        num_vars = ['Age', 'Flight Distance']
+
+        fig, axs = plt.subplots(nrows=1, ncols=2, figsize=(20, 10))
+        axs = axs.flatten()
+
+        for i, var in enumerate(num_vars):
+            sns.histplot(x=var, data=dataframe, ax=axs[i])
+
+        fig.tight_layout()
+
+        # Afficher le graphique avec Streamlit
+        st.pyplot(fig)
+        # Créer une figure avec une taille de 8x8 et une résolution de 100 dpi
+        plt.figure(figsize=(8,8),dpi=100)
+
+        # Tracer un graphique de dispersion
+        sns.scatterplot(x="Departure Delay in Minutes", y="Arrival Delay in Minutes", hue="satisfaction", data=dataframe, edgecolor="black")
+
+        # Afficher le graphique
+        st.pyplot(plt)
+        # Affichage de la heatmap
+        st.write("## Heatmap des corrélations")
+        plt.figure(figsize=(15,12))
+        sns.heatmap(dataframe.corr(), annot=False, fmt='.2g')
+        st.pyplot()
+
+
 
 
 
