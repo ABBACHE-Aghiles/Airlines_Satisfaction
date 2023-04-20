@@ -20,7 +20,7 @@ dataframe = None
 
 # Onglets
 tab1, tab2 = st.tabs(
-    ["Upload & data exploration", "Prétraitement des données])
+    ["Upload & data exploration", "Prétraitement des données"])
 
 # Page d'analyse
 with tab1:
