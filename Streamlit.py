@@ -66,19 +66,7 @@ with tab1:
             st.write("1) La colonne correspondant à la caractéristique Délai d'arrivée en minutes comporte 310 valeurs manquantes.")
             st.write("2) Les deux premières caractéristiques sont inutiles et n'affecteront pas la classification, nous devrions donc nous en débarrasser.")
             
-            # Supprimer les colonnes "Unnamed: 0" et "ID"
-            dataframe.drop(columns=['Unnamed: 0', 'ID'], inplace=True)
-
-            # Afficher le code pour supprimer les colonnes
-            st.write("# Supprimer les colonnes \"Unnamed: 0\" et \"ID\"")
-            st.write("dataframe.drop(columns=['Unnamed: 0', 'ID'], inplace=True)")
-
-            # Afficher la forme du DataFrame mis à jour
-            st.write("La forme du DataFrame mis à jour est : ", dataframe.shape)
-
-            # Afficher les informations du DataFrame mis à jour
-            st.write("Les informations du DataFrame mis à jour sont : ")
-            st.write(dataframe.info())
+            
 
     else: 
         st.warning("Veuillez choisir un fichier CSV")
