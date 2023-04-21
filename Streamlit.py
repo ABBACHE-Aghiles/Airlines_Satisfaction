@@ -231,6 +231,8 @@ with tab3:
         from sklearn.ensemble import RandomForestClassifier
         from sklearn.model_selection import train_test_split
         from sklearn.metrics import accuracy_score
+        from sklearn.metrics import accuracy_score, f1_score, precision_score, recall_score, jaccard_score, log_loss
+
 
 
         # Sélectionner les variables d'entrée et la variable cible
@@ -262,6 +264,36 @@ with tab3:
 
         # Afficher l'exactitude du modèle
         st.write('L\'exactitude du modèle est de :', accuracy)
+        # Calculer les scores
+        f1 = f1_score(y_test, y_pred, average='micro')
+        precision = precision_score(y_test, y_pred, average='micro')
+        recall = recall_score(y_test, y_pred, average='micro')
+        jaccard = jaccard_score(y_test, y_pred, average='micro')
+
+        # Afficher les scores
+        st.write('F-1 Score:', f1)
+        st.write('Precision Score:', precision)
+        st.write('Recall Score:', recall)
+        st.write('Jaccard Score:', jaccard)
+        # Create a DataFrame with feature importances
+        imp_df = pd.DataFrame({
+            "Feature Name": X_train.columns,
+            "Importance": rfc.feature_importances_
+            })
+        fi = imp_df.sort_values(by="Importance", ascending=False)
+
+        # Select the top 10 features
+        fi2 = fi.head(10)
+
+        # Plot the feature importances
+        plt.figure(figsize=(10,8))
+        sns.barplot(data=fi2, x='Importance', y='Feature Name')
+        plt.title('Top 10 Feature Importance Each Attributes (Random Forest)', fontsize=18)
+        plt.xlabel ('Importance', fontsize=16)
+        plt.ylabel ('Feature Name', fontsize=16)
+
+        # Display the plot using Streamlit
+        st.pyplot()
 
         
         
