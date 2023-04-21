@@ -374,7 +374,49 @@ with tab4:
 
         # Afficher l'accuracy
         st.write(f"Accuracy : {accuracy}")
+        
+with tab5:
+    if dataframe is not None:
+        from sklearn.linear_model import LogisticRegression
+        from sklearn.metrics import accuracy_score, confusion_matrix, classification_report
+        from sklearn.preprocessing import StandardScaler
+        # Sélection des variables d'entrée et de la variable cible
+        X = df[['Gender', 'Customer Type', 'Age', 'Type of Travel', 'Class', 'Flight Distance',
+          'Inflight wifi service', 'Departure/Arrival time convenient', 'Ease of Online booking',
+          'Gate location', 'Food and drink', 'Online boarding', 'Seat comfort',
+          'Inflight entertainment', 'On-board service', 'Leg room service', 'Baggage handling',
+          'Checkin service', 'Inflight service', 'Cleanliness', 'Departure Delay in Minutes',
+          'Arrival Delay in Minutes']]
+        y = df['satisfaction']
 
+        # Conversion des variables catégorielles en variables binaires
+        X = pd.get_dummies(X)
+
+        # Division des données en ensembles d'entraînement et de test
+        X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
+
+        # Normalisation des données
+        scaler = StandardScaler()
+        scaler.fit(X_train)
+        scaled_X_train = scaler.transform(X_train)
+        scaled_X_test = scaler.transform(X_test)
+
+        # Création du modèle de régression logistique
+        clf = LogisticRegression(random_state=0).fit(scaled_X_train, y_train)
+
+        # Prédiction sur les données d'entraînement et de test
+        y_pred_train = clf.predict(scaled_X_train)
+        y_pred_test = clf.predict(scaled_X_test)
+
+        # Affichage de la matrice de confusion et des scores de précision
+        st.subheader("Matrice de confusion pour les données d'entraînement :")
+        st.write(confusion_matrix(y_train, y_pred_train))
+        st.subheader("Matrice de confusion pour les données de test :")
+        st.write(confusion_matrix(y_test, y_pred_test))
+        st.subheader("Score de précision pour les données d'entraînement :")
+        st.write(clf.score(scaled_X_train, y_train))
+        st.subheader("Score de précision pour les données de test :")
+        st.write(clf.score(scaled_X_test, y_test))
         
         
         
