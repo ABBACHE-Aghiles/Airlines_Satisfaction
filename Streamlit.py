@@ -450,7 +450,7 @@ with tab5:
         ax.plot(fpr, tpr, lw=2)
         ax.set_xlim([0.0, 1.0])
         ax.set_ylim([0.0, 1.05])
-        ax.set_xlabel("Specificite", fontsize=14)
+        ax.set_xlabel("1-Specificite", fontsize=14)
         ax.set_ylabel("Sensibilite", fontsize=14)
         st.pyplot(fig)
         
