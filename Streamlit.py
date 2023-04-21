@@ -324,7 +324,7 @@ with tab4:
         kmeans.fit(X_train)
 
         # Prédire les clusters pour les données de test
-        y_pred = kmeans.predict(X_test)
+        y_pred = kmeans.predict(X_train)
 
         # Calculer la valeur de silhouette moyenne
         silhouette_avg = silhouette_score(X_train, kmeans.labels_)
@@ -370,7 +370,7 @@ with tab4:
         y_test = [1 if x == "satisfied" else 0 for x in y_test]
 
         # Calculer l'accuracy du modèle
-        accuracy = accuracy_score(y_test, y_pred)
+        accuracy = accuracy_score(y_train, y_pred)
 
         # Afficher l'accuracy
         st.write(f"Accuracy : {accuracy}")
