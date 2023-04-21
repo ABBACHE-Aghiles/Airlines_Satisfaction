@@ -266,7 +266,7 @@ with tab3:
         
         
         
-with tab4:
+"""with tab4:
     if dataframe is not None:
         
         
@@ -277,7 +277,7 @@ with tab5:
         
         
 with tab6:
-    if dataframe is not None:
+    if dataframe is not None:"""
 
 
 
