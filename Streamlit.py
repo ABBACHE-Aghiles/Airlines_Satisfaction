@@ -100,7 +100,7 @@ with tab1:
                 st.write(f"{col}: {dataframe[col].unique()}")
                 
             # Vérifier les valeurs nulles
-            check_missing = data.isnull().sum() * 100 / data.shape[0]
+            check_missing = dataframe.isnull().sum() * 100 / dataframe.shape[0]
 
             # Afficher les valeurs manquantes
             if check_missing.any():
