@@ -380,13 +380,6 @@ with tab4:
         
         
         
-        
-with tab5:
-    if dataframe is not None:  
-        
-        
-with tab6:
-    if dataframe is not None:"""
 
 
 
