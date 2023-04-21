@@ -98,6 +98,24 @@ with tab1:
             st.write("Valeurs uniques pour les colonnes catégorielles :")
             for col in dataframe.select_dtypes(include=['object']).columns:
                 st.write(f"{col}: {dataframe[col].unique()}")
+                
+            # Vérifier les valeurs nulles
+            check_missing = data.isnull().sum() * 100 / data.shape[0]
+
+            # Afficher les valeurs manquantes
+            if check_missing.any():
+                st.write('Les colonnes avec des valeurs manquantes :')
+                st.write(check_missing[check_missing > 0].sort_values(ascending=False))
+            else:
+                st.write('Aucune valeur manquante dans les données.')
+
+            # Remplacer les valeurs manquantes
+            data['Arrival Delay in Minutes'].fillna(data['Arrival Delay in Minutes'].median(), inplace=True)
+            st.write('Les valeurs manquantes dans la colonne "Arrival Delay in Minutes" ont été remplacées par la médiane.')
+
+# Afficher les données
+st.write('Les données :')
+st.write(data.head())
 
         
 
