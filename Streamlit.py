@@ -303,6 +303,8 @@ with tab4:
         from sklearn.linear_model import LogisticRegression
         from sklearn.metrics import accuracy_score, confusion_matrix, classification_report
         from sklearn.preprocessing import StandardScaler
+        from sklearn.cluster import KMeans
+        from sklearn.metrics import silhouette_score, silhouette_samples
         # Sélectionner les variables d'entrée et la variable cible
         X = dataframe[['Gender', 'Customer Type', 'Age', 'Type of Travel', 'Class', 'Flight Distance',
           'Inflight wifi service', 'Departure/Arrival time convenient', 'Ease of Online booking',
