@@ -417,6 +417,42 @@ with tab5:
         st.write(clf.score(scaled_X_train, y_train))
         st.subheader("Score de précision pour les données de test :")
         st.write(clf.score(scaled_X_test, y_test))
+        from sklearn import metrics
+        from sklearn.metrics import roc_curve, auc
+
+        # Convertir les étiquettes en format binaire (0 ou 1)
+        y_train = [1 if x == "satisfied" else 0 for x in y_train]
+        y_test = [1 if x == "satisfied" else 0 for x in y_test]
+
+        # Faire des prévisions de probabilité pour les données de test
+        y_pred_prob = clf.predict_proba(X_test)[:, 1]
+
+        # Calculer la courbe ROC et l'aire sous la courbe (AUC)
+        fpr, tpr, thresholds = roc_curve(y_test, y_pred_prob)
+        roc_auc = auc(fpr, tpr)
+
+        # Tracer la courbe ROC
+        st.set_option('deprecation.showPyplotGlobalUse', False) # Pour éviter un avertissement obsolète
+        fig, ax = plt.subplots()
+        ax.plot(fpr, tpr, color='darkorange', lw=2, label='Courbe ROC (AUC = %0.2f)' % roc_auc)
+        ax.plot([0, 1], [0, 1], color='navy', lw=2, linestyle='--')
+        ax.set_xlim([0.0, 1.0])
+        ax.set_ylim([0.0, 1.05])
+        ax.set_xlabel('Taux de faux positifs')
+        ax.set_ylabel('Taux de vrais positifs')
+        ax.set_title('Courbe ROC pour de ce modèle de régression logistique')
+        ax.legend(loc="lower right")
+
+        # Afficher la courbe ROC dans Streamlit
+        st.pyplot(fig)
+        
+        fig, ax = plt.subplots()
+        ax.plot(fpr, tpr, lw=2)
+        ax.set_xlim([0.0, 1.0])
+        ax.set_ylim([0.0, 1.05])
+        ax.set_xlabel("Specificite", fontsize=14)
+        ax.set_ylabel("Sensibilite", fontsize=14)
+        st.pyplot(fig)
         
         
         
