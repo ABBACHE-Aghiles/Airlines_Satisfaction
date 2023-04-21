@@ -234,13 +234,13 @@ with tab3:
 
 
         # Sélectionner les variables d'entrée et la variable cible
-        X = data[['Gender', 'Customer Type', 'Age', 'Type of Travel', 'Class', 'Flight Distance',
+        X = dataframe[['Gender', 'Customer Type', 'Age', 'Type of Travel', 'Class', 'Flight Distance',
           'Inflight wifi service', 'Departure/Arrival time convenient', 'Ease of Online booking',
           'Gate location', 'Food and drink', 'Online boarding', 'Seat comfort',
           'Inflight entertainment', 'On-board service', 'Leg room service', 'Baggage handling',
           'Checkin service', 'Inflight service', 'Cleanliness', 'Departure Delay in Minutes',
           'Arrival Delay in Minutes']]
-        y = data['satisfaction']
+        y = dataframe['satisfaction']
     
         # Convertir les variables catégorielles en variables binaires
         X = pd.get_dummies(X)
