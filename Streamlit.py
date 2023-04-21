@@ -110,12 +110,12 @@ with tab1:
                 st.write('Aucune valeur manquante dans les données.')
 
             # Remplacer les valeurs manquantes
-            data['Arrival Delay in Minutes'].fillna(data['Arrival Delay in Minutes'].median(), inplace=True)
+            data['Arrival Delay in Minutes'].fillna(dataframe['Arrival Delay in Minutes'].median(), inplace=True)
             st.write('Les valeurs manquantes dans la colonne "Arrival Delay in Minutes" ont été remplacées par la médiane.')
 
             # Afficher les données
             st.write('Les données :')
-            st.write(data.head())
+            st.write(dataframe.head())
 
         
 
