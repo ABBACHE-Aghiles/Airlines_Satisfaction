@@ -16,8 +16,8 @@ st.title("Data Slayers ⚔️")
 dataframe = None
 
 # Onglets
-tab1 , tab2 = st.tabs(
-    ["Upload & data exploration", "Visualisation"])
+tab1 , tab2, tab3, tab4, tab5,tab6 = st.tabs(
+    ["Upload and explore DATA ♥", "Visualisation","Random Forest","K-Means", "Régression Logistique","DNN"])
 
 
 # Page d'analyse
@@ -224,9 +224,60 @@ with tab2:
         sns.heatmap(dataframe.corr(), annot=False, fmt='.2g')
         st.pyplot()
 
+with tab3:
+    if dataframe is not None:
+        import streamlit as st
+        import pandas as pd
+        from sklearn.ensemble import RandomForestClassifier
+        from sklearn.model_selection import train_test_split
+        from sklearn.metrics import accuracy_score
 
 
+        # Sélectionner les variables d'entrée et la variable cible
+        X = data[['Gender', 'Customer Type', 'Age', 'Type of Travel', 'Class', 'Flight Distance',
+          'Inflight wifi service', 'Departure/Arrival time convenient', 'Ease of Online booking',
+          'Gate location', 'Food and drink', 'Online boarding', 'Seat comfort',
+          'Inflight entertainment', 'On-board service', 'Leg room service', 'Baggage handling',
+          'Checkin service', 'Inflight service', 'Cleanliness', 'Departure Delay in Minutes',
+          'Arrival Delay in Minutes']]
+        y = data['satisfaction']
+    
+        # Convertir les variables catégorielles en variables binaires
+        X = pd.get_dummies(X)
 
+        # Diviser les données en ensembles d'entraînement et de test (Test size 20% and Train size 80%)
+        X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
+
+        # Créer un objet RandomForestClassifier
+        rfc = RandomForestClassifier(n_estimators=200, max_depth=None, max_features='sqrt')
+
+        # Entraîner le modèle avec les données d'entraînement
+        rfc.fit(X_train, y_train)
+
+        # Faire des prédictions sur les données de test
+        y_pred = rfc.predict(X_test)
+
+        # Calculer l'exactitude du modèle
+        accuracy = accuracy_score(y_test, y_pred)
+
+        # Afficher l'exactitude du modèle
+        st.write('L\'exactitude du modèle est de :', accuracy)
+
+        
+        
+        
+with tab4:
+    if dataframe is not None:
+        
+        
+        
+        
+with tab5:
+    if dataframe is not None:  
+        
+        
+with tab6:
+    if dataframe is not None:
 
 
 
