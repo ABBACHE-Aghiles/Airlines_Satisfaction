@@ -381,13 +381,13 @@ with tab5:
         from sklearn.metrics import accuracy_score, confusion_matrix, classification_report
         from sklearn.preprocessing import StandardScaler
         # Sélection des variables d'entrée et de la variable cible
-        X = df[['Gender', 'Customer Type', 'Age', 'Type of Travel', 'Class', 'Flight Distance',
+        X = dataframe[['Gender', 'Customer Type', 'Age', 'Type of Travel', 'Class', 'Flight Distance',
           'Inflight wifi service', 'Departure/Arrival time convenient', 'Ease of Online booking',
           'Gate location', 'Food and drink', 'Online boarding', 'Seat comfort',
           'Inflight entertainment', 'On-board service', 'Leg room service', 'Baggage handling',
           'Checkin service', 'Inflight service', 'Cleanliness', 'Departure Delay in Minutes',
           'Arrival Delay in Minutes']]
-        y = df['satisfaction']
+        y = dataframe['satisfaction']
 
         # Conversion des variables catégorielles en variables binaires
         X = pd.get_dummies(X)
