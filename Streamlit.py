@@ -16,7 +16,7 @@ st.title("Data Slayers ⚔️")
 dataframe = None
 
 # Onglets
-tab1 , tab2, tab3, tab4, tab5,tab6 = st.tabs(
+tab1 , tab2, tab3, tab4, tab5 = st.tabs(
     ["Upload and explore DATA ♥", "Visualisation","Text Blob", "Régression Logistique", "SVC"])
 
 
